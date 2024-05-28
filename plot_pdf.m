@@ -32,7 +32,7 @@ function plot_pdf(pns)
         x = transition_positions(i, 1) - width / 2;
         y = transition_positions(i, 2) - height / 2;
         rectangle('Position', [x, y, width, height], 'FaceColor', 'w');
-        text(transition_positions(i, 1) + 1, transition_positions(i, 2), transitions(i).name, 'HorizontalAlignment', 'left', 'VerticalAlignment', 'middle');
+        text(transition_positions(i, 1) -0.2, transition_positions(i, 2)+ 1.3, transitions(i).name, 'HorizontalAlignment', 'left', 'VerticalAlignment', 'middle');
     
     end
 
