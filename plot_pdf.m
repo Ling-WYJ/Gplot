@@ -57,3 +57,18 @@ function plot_pdf(pns)
           
         end
     end
+
+
+
+     % 设置图形属性
+    axis equal;
+    axis([-radius-5, radius+5, -radius-5, radius+5]); % 设置绘图范围
+    set(gca, 'XTick', []);
+    set(gca, 'YTick', []);
+    title('Petri Net Visualization');
+    hold off;
+
+end
+
+
+

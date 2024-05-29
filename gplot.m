@@ -1,2 +1,2 @@
 function gplot(pns)
-    plot_pdf(pns)
+plot_pdf(pns)
