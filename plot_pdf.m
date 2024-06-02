@@ -3,10 +3,6 @@ function plot_pdf(pns)
     places = pns.global_places;
     transitions = pns.global_transitions;
     arcs = pns.incidence_matrix;
-    
-    % 创建图形窗口
-    figure('units','normalized','outerposition',[0 0 1 1], 'Color', 'w');
-    hold on;
 
     % 绘制库所
     num_places = numel(places); % 使用 numel 获取库所总数
@@ -65,8 +61,7 @@ function plot_pdf(pns)
     axis([-radius-5, radius+5, -radius-5, radius+5]); % 设置绘图范围
     set(gca, 'XTick', []);
     set(gca, 'YTick', []);
-    title('Petri Net Visualization');
-    hold off;
+    title(pns.name);
 
 end
 
