@@ -11,7 +11,7 @@ function plot_pdf(pns)
     for i = 1:num_places
         angle = 2 * pi * (i-1) / num_places; % 计算每个库所的角度位置
         place_positions(i, :) = radius * [cos(angle), sin(angle)];
-        plot(place_positions(i, 1), place_positions(i, 2), 'o', 'MarkerSize', 20, 'MarkerFaceColor', 'w');
+        plot(place_positions(i, 1), place_positions(i, 2), 'o', 'MarkerSize', 20, 'MarkerFaceColor', 'w','MarkerEdgeColor', 'k');
         text(place_positions(i, 1) -0.5, place_positions(i, 2)-1, places(i).name, 'HorizontalAlignment', 'left', 'VerticalAlignment', 'middle'); 
     end
 
