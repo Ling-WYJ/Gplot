@@ -1,4 +1,4 @@
-function plot_tokens(sim_result)
+function plot_tokens(sim_result,pns,place_positions)
 
     global PN;
     PN = sim_result;
@@ -13,7 +13,7 @@ function plot_tokens(sim_result)
     else 
         finishing_time{1} = num2str(start_time); 
     end
-    current_markings{1} = markings_string(PN.LOG(1, 1:Ps));
+    current_markings{1} = PN.LOG(1, 1:Ps);
     state{1} = num2str(0);
     
     
@@ -31,7 +31,7 @@ function plot_tokens(sim_result)
             end
 % %        disp(' '); disp('Just before new state ....');
 % %        print_statespace_enabled_and_firing_trans(ETS_index-1);
-             current_markings{end + 1} = markings_string(current_row(1:Ps)); 
+             current_markings{end + 1} = current_row(1:Ps); 
 %             virtual_tokens = current_row(Ps+7:end); 
             
 %         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,7 +53,7 @@ function plot_tokens(sim_result)
                       'Position', [150, 160, 150, 40], 'FontSize', 14);
     stateText = uicontrol('Style', 'text', 'String', ['State: ' state{currentStateIdx}], ...
                       'Position', [150, 100, 150, 40], 'FontSize', 14);
-    markingText = uicontrol('Style', 'text', 'String', ['Marking: ' current_markings{currentStateIdx}], ...
+    markingText = uicontrol('Style', 'text', 'String', ['Marking: ' markings_string(current_markings{currentStateIdx})], ...
                       'Position', [150, 500, 150, 100], 'FontSize', 14);                  
     % 添加前一个状态按钮
     uicontrol('Style', 'pushbutton', 'String', 'Previous', ...
@@ -87,7 +87,8 @@ function plot_tokens(sim_result)
     function update()
         timeText.String = ['Time: ' finishing_time{currentStateIdx}];
         stateText.String = ['State: ' state{currentStateIdx}];
-        markingText.String = ['Marking: ' current_markings{currentStateIdx}];
+        markingText.String = ['Marking: ' markings_string(current_markings{currentStateIdx})];
+        plot_markings(current_markings{currentStateIdx});
     end
 
 

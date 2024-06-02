@@ -1,4 +1,5 @@
 function plot_pdf(pns)
+    global place_positions;
     % 解析pns结构体中的信息
     places = pns.global_places;
     transitions = pns.global_transitions;
