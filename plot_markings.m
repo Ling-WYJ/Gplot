@@ -29,10 +29,9 @@ function plot_markings(markings)
                 % tokens_nr_str = int2str(tokens);
                 hold on;
                 text(place_positions(i, 1), place_positions(i, 2), num2str(tokens), 'FontSize', 12, 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'Color', 'k','Tag', 'petri_net_marking');
-            end;
-            % markings_str = [markings_str, tokens_nr_str, ...
-            %     PN.global_places(i).name, ' + '];
-        end; % if tokens,           
+            end
+           
+        end        
     end % for i = 1:Ps,
 
 end

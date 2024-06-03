@@ -1,4 +1,4 @@
-function plot_tokens(sim_result,pns,place_positions)
+function plot_tokens(sim_result)
 
     global PN;
     PN = sim_result;
