@@ -29,16 +29,16 @@ function executed_lines = profile_common_pre(trans_name)
         % 获取COMMON_PRE函数的源代码
         commonPreSrc = get_source_code('COMMON_PRE');
         
-        % 过滤执行过的代码行，去除不满足条件的行
-        executed_lines = filter_executed_lines(executed_lines, commonPreSrc);
+        % 过滤执行过的代码行，去除不满足条件和包含'return'的行
+        filtered_lines = filter_executed_lines(executed_lines, commonPreSrc);
     else
-        executed_lines = [];
+        filtered_lines = {};
     end
 
     % 打印执行过的代码行
     disp('Executed lines in COMMON_PRE:');
-    for i = 1:size(executed_lines, 1)
-        disp(executed_lines(i, :));
+    for i = 1:length(filtered_lines)
+        disp(filtered_lines{i});
     end
 end
 
@@ -71,7 +71,7 @@ end
 
 function filtered_lines = filter_executed_lines(executed_lines, src)
     % 过滤执行过的代码行，去除不满足条件和包含'return'的行
-    filtered_lines = [];
+    filtered_lines = {};
     for i = 1:size(executed_lines, 1)
         line_num = executed_lines(i, 1);
         code_line = strtrim(src{line_num});
@@ -80,9 +80,17 @@ function filtered_lines = filter_executed_lines(executed_lines, src)
            ~startsWith(code_line, 'elseif') && ...
            ~startsWith(code_line, 'end') && ...
            ~contains(code_line, 'return')
-            filtered_lines = [filtered_lines; executed_lines(i, :)];
+            % 去除注释部分
+            code_line = remove_comments(code_line);
+            filtered_lines{end+1} = code_line;
         end
     end
 end
 
-
+function code_line = remove_comments(code_line)
+    % 去除代码行中的注释部分
+    comment_idx = strfind(code_line, '%');
+    if ~isempty(comment_idx)
+        code_line = strtrim(code_line(1:comment_idx(1)-1));
+    end
+end
