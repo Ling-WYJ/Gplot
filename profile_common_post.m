@@ -1,4 +1,4 @@
-function executed_lines = profile_common_post(trans_name)
+function filtered_lines = profile_common_post(trans_name)
     % 启动profiler
     profile on;
 
@@ -79,6 +79,7 @@ function filtered_lines = filter_executed_lines(executed_lines, src)
            ~startsWith(code_line, 'else') && ...
            ~startsWith(code_line, 'elseif') && ...
            ~startsWith(code_line, 'end') && ...
+           ~startsWith(code_line, 'disp') && ...
            ~contains(code_line, 'return')
             % 去除注释部分
             code_line = remove_comments(code_line);

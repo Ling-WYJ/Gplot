@@ -3,7 +3,9 @@ function plot_pre(pns, sim_result)
     global transition_positions;
     transitions = pns.global_transitions;
     num_transitions = numel(transitions);
-    filtered_lines = trace_specific_pre('tGen');
+    %filtered_lines = trace_specific_pre('tGen');
+    filtered_lines = profile_common_pre('tA');
+    
     
     % 创建一个初始隐藏的文本标签，用于显示提示信息
     label = text(0, 0, '', 'Visible', 'off', 'HorizontalAlignment', 'left', 'VerticalAlignment', 'top', 'FontSize', 10,'Interpreter','none','BackgroundColor','#F5F5F5');
@@ -13,7 +15,7 @@ function plot_pre(pns, sim_result)
     
     % 为每个 "PRE" 文字添加鼠标悬停事件
     for i = 1:num_transitions
-        pre_pos = transition_positions(i, :) - [1, 0]; % "PRE" 文字的位置
+        pre_pos = transition_positions(i, :) - [1.2, 0]; % "PRE" 文字的位置
         h = text(pre_pos(1), pre_pos(2), 'PRE', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold');
         set(h, 'ButtonDownFcn', {@show_tooltip, label, filtered_lines, pre_positions});
     end
@@ -24,13 +26,14 @@ end
 
 function pre_positions = get_pre_positions(transition_positions)
     % 计算 "PRE" 文字的位置
-    pre_positions = transition_positions - [1, 0]; % 假设 "PRE" 文字在每个变迁文字的左侧
+    pre_positions = transition_positions - [1.2, 0]; % 假设 "PRE" 文字在每个变迁文字的左侧
 end
 
 function show_tooltip(~, ~, label, filtered_lines, ~)
     % 显示提示框
     x = label.UserData(1);
     y = label.UserData(2);
+    
     label.String = filtered_lines;
     label.Position = [x, y];
     label.Visible = 'on';
