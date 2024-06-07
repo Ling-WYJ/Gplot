@@ -3,6 +3,7 @@ function gplot(pns,sim_result)
     figure('units','normalized','outerposition',[0 0 1 1], 'Color', 'w');    
     hold on;
     plot_pdf(pns)
+    plot_pre(pns,sim_result);
     plot_tokens(sim_result);
     hold off;
 end

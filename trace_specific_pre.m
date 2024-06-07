@@ -32,6 +32,9 @@ function filtered_lines = trace_specific_pre(transition_name)
         if startsWith(line, 'function')
             continue;
         end
+        if startsWith(line, 'disp')
+            continue;
+        end
         if startsWith(line, '%')
             continue;
         end
