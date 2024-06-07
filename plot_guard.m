@@ -15,8 +15,9 @@ function plot_guard(pns, sim_result)
     
     % 为每个变迁获取 filtered_lines 和 post_lines
     for i = 1:num_transitions
-        transition_data(i).filtered_lines = profile_common_pre(transitions(i).name);
-        transition_data(i).post_lines = profile_common_post(transitions(i).name);
+        %transition_data(i).filtered_lines = profile_common_pre(transitions(i).name);
+        transition_data(i).filtered_lines = collect_pre(sim_result,transitions(i).name,i);
+        transition_data(i).post_lines = collect_post(sim_result,transitions(i).name,i);
     end
 
     for i = 1:num_transitions
