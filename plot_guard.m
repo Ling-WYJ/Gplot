@@ -12,23 +12,24 @@ function plot_guard(pns, sim_result)
     
     % 初始化结构体来存储不同变迁的 filtered_lines 和 post_lines
     transition_data = struct();
-    
-    % 为每个变迁获取 filtered_lines 和 post_lines
-    for i = 1:num_transitions
-        %transition_data(i).filtered_lines = profile_common_pre(transitions(i).name);
-        transition_data(i).filtered_lines = collect_pre(sim_result,transitions(i).name,i);
-        transition_data(i).post_lines = collect_post(sim_result,transitions(i).name,i);
-    end
 
     for i = 1:num_transitions
         pre_pos = transition_positions(i, :) - [1.2, 0]; 
         post_pos = transition_positions(i, :) + [1.5, 0];
+        if ((sim_result.PRE_exist(i)) || (sim_result.COMMON_PRE))
+            transition_data(i).filtered_lines = collect_pre(sim_result,transitions(i).name,i);
+            pre_h = text(pre_pos(1), pre_pos(2), 'PRE', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold');
+            set(pre_h, 'ButtonDownFcn', {@show_tooltip, label, transition_data(i).filtered_lines, pre_positions});
+        end
+        if ((sim_result.POST_exist(i)) || (sim_result.COMMON_POST))
+            transition_data(i).post_lines = collect_post(sim_result,transitions(i).name,i);
+            post_h = text(post_pos(1), post_pos(2), 'POST', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold');
+            set(post_h, 'ButtonDownFcn', {@show_tooltip, post_label, transition_data(i).post_lines, post_positions});
+        end   
+       
+       
         
-        pre_h = text(pre_pos(1), pre_pos(2), 'PRE', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold');
-        set(pre_h, 'ButtonDownFcn', {@show_tooltip, label, transition_data(i).filtered_lines, pre_positions});
-        
-        post_h = text(post_pos(1), post_pos(2), 'POST', 'HorizontalAlignment', 'center', 'VerticalAlignment', 'middle', 'FontSize', 12, 'FontWeight', 'bold');
-        set(post_h, 'ButtonDownFcn', {@show_tooltip, post_label, transition_data(i).post_lines, post_positions});
+      
     end
 
     set(gcf, 'WindowButtonMotionFcn', {@mouse_move_callback, label, post_label, pre_positions, post_positions, transition_data});

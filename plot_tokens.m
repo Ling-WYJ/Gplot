@@ -64,6 +64,7 @@ function plot_tokens(sim_result)
     uicontrol('Style', 'pushbutton', 'String', 'Next', ...
               'Position', [300, 30, 100, 40], ...
               'Callback', @nextStateCallback);
+    update();          
     
               % 前一个状态按钮的回调函数
     function prevStateCallback(~, ~)
