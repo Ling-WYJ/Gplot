@@ -43,7 +43,7 @@ function plot_pdf(pns)
                     end_pos = transition_positions(i, :);
                     %draw_arrow(start_pos, end_pos, arcs(i,j));
                     from_place = true;
-                    draw_arrow(start_pos, end_pos, arcs(i,j),from_place);
+                    draw_arrow(start_pos,end_pos, arcs(i,j),from_place,i);
                     
                 end
                
@@ -52,7 +52,7 @@ function plot_pdf(pns)
                     start_pos = transition_positions(i, :);
                     end_pos = place_positions(j - num_places, :);
                     from_place = false;
-                    draw_arrow(start_pos, end_pos, arcs(i,j),from_place);
+                    draw_arrow(start_pos,end_pos, arcs(i,j),from_place, i);
                 end
            end
           

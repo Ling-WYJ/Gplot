@@ -37,7 +37,8 @@
 % end
 
 
-function draw_arrow(start_pos, end_pos, weight,from_place)
+function draw_arrow(start_pos, end_pos, weight,from_place,transition_index)
+    global transitions_guard_positions;
     % 计算箭头的方向向量
     direction = end_pos - start_pos;
     
@@ -55,9 +56,11 @@ function draw_arrow(start_pos, end_pos, weight,from_place)
     if(from_place)
         new_start_pos = start_pos + 0.4 * norm_direction;
         new_end_pos = end_pos - 0.8 * norm_direction;
+        transitions_guard_positions{transition_index}.pre_pos = new_end_pos;
     else
         new_start_pos = start_pos + 0.8 * norm_direction;
         new_end_pos = end_pos - 0.4 * norm_direction;
+        transitions_guard_positions{transition_index}.post_pos = new_start_pos;
     end    
 
     % 计算箭头尖端和两侧翼尖的位置
