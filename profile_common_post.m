@@ -36,10 +36,10 @@ function filtered_lines = profile_common_post(trans_name)
     end
 
     % 打印执行过的代码行
-    disp('Executed lines in COMMON_POST:');
-    for i = 1:length(filtered_lines)
-        disp(filtered_lines{i});
-    end
+    % disp('Executed lines in COMMON_POST:');
+    % for i = 1:length(filtered_lines)
+    %     disp(filtered_lines{i});
+    % end
 end
 
 function idx = findcalltree(calltree, funcname)

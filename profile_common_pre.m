@@ -29,17 +29,17 @@ function filtered_lines = profile_common_pre(trans_name)
         % 获取COMMON_PRE函数的源代码
         commonPreSrc = get_source_code('COMMON_PRE');
         
-        % 过滤执行过的代码行，去除不满足条件和包含'return'的行
+        % 过滤执行过的代码行
         filtered_lines = filter_executed_lines(executed_lines, commonPreSrc);
     else
         filtered_lines = {};
     end
 
     % 打印执行过的代码行
-    disp('Executed lines in COMMON_PRE:');
-    for i = 1:length(filtered_lines)
-        disp(filtered_lines{i});
-    end
+    % disp('Executed lines in COMMON_PRE:');
+    % for i = 1:length(filtered_lines)
+    %     disp(filtered_lines{i});
+    % end
 end
 
 function idx = findcalltree(calltree, funcname)

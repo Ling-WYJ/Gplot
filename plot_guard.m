@@ -14,8 +14,10 @@ function plot_guard(pns, sim_result)
     post_positions = zeros(num_transitions, 2);
 
     for i = 1:num_transitions
-        pre_pos = transitions_guard_positions{i}.pre_pos;
-        post_pos = transitions_guard_positions{i}.post_pos;
+        % pre_pos = transitions_guard_positions{i}.pre_pos;
+        % post_pos = transitions_guard_positions{i}.post_pos;
+        pre_pos = transition_positions(i, :) - [1.4,0]; 
+        post_pos = transition_positions(i, :) + [1.5, 0]; 
         pre_positions(i, :) = pre_pos;
         post_positions(i, :) = post_pos;
         if ((sim_result.PRE_exist(i)) || (sim_result.COMMON_PRE))

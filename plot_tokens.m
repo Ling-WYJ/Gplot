@@ -17,10 +17,10 @@ function plot_tokens(sim_result)
     state{1} = num2str(0);
     
     
-     for i = 2:no_of_rows
+    for i = 2:no_of_rows
         current_row = PN.LOG(i, :);
         fired_trans = current_row(Ps+1);
-         if (fired_trans)
+        if (fired_trans)
             state{end + 1} = num2str(current_row(Ps+2));
 %             ETS_index = current_row(Ps+4); 
 %             start_time = current_row(Ps+5);
@@ -44,8 +44,14 @@ function plot_tokens(sim_result)
 %             end;
 %         % end of change -1 
 %         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                    
-         end
+        end
     end  
+    % num_rows = length(current_markings);
+    % for i = 1:num_rows
+    %     current_row = current_markings{i}; % 提取第 i 行
+    %     fprintf('行 %d: ', i);
+    %     disp(current_row); % 输出当前行
+    % end
     
 
     % 在图形窗口上添加文本框

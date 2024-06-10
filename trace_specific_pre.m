@@ -43,8 +43,8 @@ function filtered_lines = trace_specific_pre(transition_name)
     end
 
      % 打印执行过的代码行
-     disp(['Executed lines in ', transition_name, '_pre:']);
-    for i = 1:length(filtered_lines)
-        disp(filtered_lines{i});
-    end
+    % disp(['Executed lines in ', transition_name, '_pre:']);
+    % for i = 1:length(filtered_lines)
+    %     disp(filtered_lines{i});
+    % end
 end
