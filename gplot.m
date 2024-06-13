@@ -1,9 +1,20 @@
 function gplot(pns,sim_result)
     % 创建图形窗口
     figure('units','normalized','outerposition',[0 0 1 1], 'Color', 'w');    
-    hold on;
+    t = tiledlayout(1, 2, 'Padding', 'compact', 'TileSpacing', 'compact');
+    global axl;
+    global axr;
+    axr = nexttile(t, 2); 
+    hold(axr, 'on');
     plot_pdf(pns);
     plot_guard(pns,sim_result);
+    axis(axr, 'off');
+    
+
+    axl = nexttile(t, 1); 
+    hold(axl, 'on');
     plot_tokens(sim_result);
+    axis(axl, 'off');
     hold off;
 end
+

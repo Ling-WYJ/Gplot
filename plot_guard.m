@@ -88,7 +88,7 @@ function show_tooltip(~, ~, label, filtered_lines, ~)
     % 显示提示框
     x = label.UserData(1);
     y = label.UserData(2);
-    disp(label.UserData);
+    %disp(label.UserData);
 
     label.String = filtered_lines;
     label.Position = [x, y];
