@@ -57,15 +57,15 @@ function plot_tokens(sim_result,set_of_places)
 
     % 在图形窗口上添加文本框
     markingText = uicontrol('Style', 'text', 'String', ['Marking: ' markings_string(current_markings{currentStateIdx})], ...
-                      'Position', [150, 700, 150, 100], 'FontSize', 14);  
+                      'Position', [250, 100, 150, 100], 'FontSize', 14);  
     plotpTimeAxes = axes('Units', 'pixels', 'Position', [150, 300, 300, 300]); 
  
     plotp_time(plotpTimeAxes,sim_result,set_of_places,finishing_time{currentStateIdx});
 
     timeText = uicontrol('Style', 'text', 'String', ['Time: ' finishing_time{currentStateIdx}], ...
-                      'Position', [150, 160, 150, 40], 'FontSize', 14);
+                      'Position', [50, 160, 150, 40], 'FontSize', 14);
     stateText = uicontrol('Style', 'text', 'String', ['State: ' state{currentStateIdx}], ...
-                      'Position', [150, 100, 150, 40], 'FontSize', 14);
+                      'Position', [50, 100, 150, 40], 'FontSize', 14);
                     
     % 添加前一个状态按钮
     uicontrol('Style', 'pushbutton', 'String', 'Previous', ...

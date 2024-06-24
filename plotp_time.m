@@ -1,6 +1,8 @@
 function [TOKEN_MATRIX] = plotp_time(plotAxes, simResults, set_of_places, time)
     global PN;
     PN = simResults;
+    
+    % 检查是否传入 plotAxes
     if nargin < 1 || isempty(plotAxes)
         figure;
         plotAxes = gca; % 获取当前轴
@@ -8,6 +10,9 @@ function [TOKEN_MATRIX] = plotp_time(plotAxes, simResults, set_of_places, time)
 
     % 确保绘图在指定的 axes 上
     axes(plotAxes);
+    
+    % 清除当前轴上的内容
+    cla(plotAxes);
 
     TOKEN_MATRIX = extractp(set_of_places);
     [nr_rows, nr_columns] = size(TOKEN_MATRIX);
@@ -62,23 +67,25 @@ function [TOKEN_MATRIX] = plotp_time(plotAxes, simResults, set_of_places, time)
     end
     
     % Plot the truncated data with different colors for each place
-    hold on;
+    hold(plotAxes, 'on');
     for i = 1:length(set_of_places)
-        plot(truncated_time_series, truncated_TOKENS(:, i), ... % DEFAULT:: linewidth=.5, MarkerSize=10
+        plot(plotAxes, truncated_time_series, truncated_TOKENS(:, i), ... % DEFAULT:: linewidth=.5, MarkerSize=10
             '-h', 'linewidth', plotLINEWIDTH, 'MarkerSize', 5, 'color', colors(i, :));
     end
     
     % Plot the complete x-axis range with invisible lines to ensure full x-axis range
-    plot(time_series, zeros(size(time_series)), 'k.', 'MarkerSize', 1, 'HandleVisibility', 'off');
+    plot(plotAxes, time_series, zeros(size(time_series)), 'k.', 'MarkerSize', 1, 'HandleVisibility', 'off');
     
     % Set y-axis limits based on the maximum token value from the entire time series
-    ylim([0, max_token_value]);
+    ylim(plotAxes, [0, max_token_value]);
     
-    grid on; grid minor; 
+    grid(plotAxes, 'on'); 
+    grid(plotAxes, 'minor'); 
     % Create a legend with all set_of_places names
-    legend(set_of_places);
-    xlabel(xunits); ylabel('Number of tokens');
-    hold off;
+    legend(plotAxes, set_of_places);
+    xlabel(plotAxes, xunits); 
+    ylabel(plotAxes, 'Number of tokens');
+    hold(plotAxes, 'off');
 end
 
 function timeValue = string_HH_MM_SS(timeString)
