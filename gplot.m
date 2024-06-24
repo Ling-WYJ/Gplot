@@ -1,4 +1,4 @@
-function gplot(pns,sim_result)
+function gplot(pns,sim_result,set_of_places)
     % 创建图形窗口
     figure('units','normalized','outerposition',[0 0 1 1], 'Color', 'w');    
     t = tiledlayout(1, 2, 'Padding', 'compact', 'TileSpacing', 'compact');
@@ -13,7 +13,7 @@ function gplot(pns,sim_result)
 
     axl = nexttile(t, 1); 
     hold(axl, 'on');
-    plot_tokens(sim_result);
+    plot_tokens(sim_result,set_of_places);
     axis(axl, 'off');
     hold off;
 end

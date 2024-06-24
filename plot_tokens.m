@@ -1,6 +1,7 @@
-function plot_tokens(sim_result)
+function plot_tokens(sim_result,set_of_places)
 
     global PN;
+    global plotAxes;
     PN = sim_result;
     Ps = PN.No_of_places;
     HH_MM_SS = PN.HH_MM_SS;
@@ -55,12 +56,17 @@ function plot_tokens(sim_result)
     
 
     % 在图形窗口上添加文本框
+    markingText = uicontrol('Style', 'text', 'String', ['Marking: ' markings_string(current_markings{currentStateIdx})], ...
+                      'Position', [150, 700, 150, 100], 'FontSize', 14);  
+    plotpTimeAxes = axes('Units', 'pixels', 'Position', [150, 300, 300, 300]); 
+ 
+    plotp_time(plotpTimeAxes,sim_result,set_of_places,finishing_time{currentStateIdx});
+
     timeText = uicontrol('Style', 'text', 'String', ['Time: ' finishing_time{currentStateIdx}], ...
                       'Position', [150, 160, 150, 40], 'FontSize', 14);
     stateText = uicontrol('Style', 'text', 'String', ['State: ' state{currentStateIdx}], ...
                       'Position', [150, 100, 150, 40], 'FontSize', 14);
-    markingText = uicontrol('Style', 'text', 'String', ['Marking: ' markings_string(current_markings{currentStateIdx})], ...
-                      'Position', [150, 500, 150, 100], 'FontSize', 14);                  
+                    
     % 添加前一个状态按钮
     uicontrol('Style', 'pushbutton', 'String', 'Previous', ...
               'Position', [50, 30, 100, 40], ...
@@ -96,6 +102,7 @@ function plot_tokens(sim_result)
         stateText.String = ['State: ' state{currentStateIdx}];
         markingText.String = ['Marking: ' markings_string(current_markings{currentStateIdx})];
         plot_markings(current_markings{currentStateIdx});
+        plotp_time(plotpTimeAxes,sim_result,set_of_places,finishing_time{currentStateIdx});
     end
 
 

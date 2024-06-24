@@ -1,33 +1,14 @@
-function [TOKEN_MATRIX] = plotp_time(simResults, set_of_places, time, plotCOLOR, plotLINEWIDTH)
-    %        [TOKEN_MATRIX] = plotp(simResults, set_of_places, ...
-    %                           plotCOLOR, plotLINEWIDTH)
-    %           Plot the tokens on the places
-    % Purpose:    
-    % To plot how tokens change with time 
-    % 
-    % Arguments:
-    % Inputs:    Simulation Results (the structure output by ‘gpensim’)
-    %           {set_of_place_names}
-    %           optional: plotCOLOR, plotLINEWIDTH, and time
-    % Outputs:    TOKEN_MATRIX (contains tokens of places with time)
-    % 
-    % Functions used:    
-    %       extractp  (extracts tokens from the SIM results structure)
-    %
-    % Used by:    [main simulation file]
-    % 
-    % Usage:    
-    %   % in main simulation file
-    %   sim = gpensim(png, dynamic);
-    %   plotp_time(sim, {'p1','p2','p3'}, '12:00:00'); 
-    %   plotp_time(sim, {'p1','p2','p3'}, '12:00:00', 'r', 10); 
-    
-    %  Reggie.Davidrajuh@uis.no (c) Version 6.0 (c) 10 july 2012  
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+function [TOKEN_MATRIX] = plotp_time(plotAxes, simResults, set_of_places, time)
     global PN;
     PN = simResults;
-    
+    if nargin < 1 || isempty(plotAxes)
+        figure;
+        plotAxes = gca; % 获取当前轴
+    end
+
+    % 确保绘图在指定的 axes 上
+    axes(plotAxes);
+
     TOKEN_MATRIX = extractp(set_of_places);
     [nr_rows, nr_columns] = size(TOKEN_MATRIX);
     
@@ -84,7 +65,7 @@ function [TOKEN_MATRIX] = plotp_time(simResults, set_of_places, time, plotCOLOR,
     hold on;
     for i = 1:length(set_of_places)
         plot(truncated_time_series, truncated_TOKENS(:, i), ... % DEFAULT:: linewidth=.5, MarkerSize=10
-            '-h', 'linewidth', plotLINEWIDTH, 'MarkerSize', 5, 'color', colors(i, :), 'DisplayName', set_of_places{i});
+            '-h', 'linewidth', plotLINEWIDTH, 'MarkerSize', 5, 'color', colors(i, :));
     end
     
     % Plot the complete x-axis range with invisible lines to ensure full x-axis range
@@ -94,12 +75,13 @@ function [TOKEN_MATRIX] = plotp_time(simResults, set_of_places, time, plotCOLOR,
     ylim([0, max_token_value]);
     
     grid on; grid minor; 
-    legend('show'); xlabel(xunits); ylabel('Number of tokens');
+    % Create a legend with all set_of_places names
+    legend(set_of_places);
+    xlabel(xunits); ylabel('Number of tokens');
     hold off;
-    end
-    
-    function timeValue = string_HH_MM_SS(timeString)
-        timeParts = sscanf(timeString, '%d:%d:%d');
-        timeValue = timeParts(1) * 3600 + timeParts(2) * 60 + timeParts(3);
-    end
-    
+end
+
+function timeValue = string_HH_MM_SS(timeString)
+    timeParts = sscanf(timeString, '%d:%d:%d');
+    timeValue = timeParts(1) * 3600 + timeParts(2) * 60 + timeParts(3);
+end
