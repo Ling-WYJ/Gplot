@@ -68,7 +68,7 @@ function plot_pdf(pns)
     axis([-radius-5, radius+5, -radius-5, radius+5]); % 设置绘图范围
     set(gca, 'XTick', []);
     set(gca, 'YTick', []);
-    title(pns.name);
+    
 
 end
 

@@ -1,7 +1,8 @@
 function gplot(pns,sim_result,set_of_places)
     % 创建图形窗口
-    figure('units','normalized','outerposition',[0 0 1 1], 'Color', 'w');    
+    figure('units','normalized','outerposition',[0 0 1 1], 'Color', 'w');   
     t = tiledlayout(1, 2, 'Padding', 'compact', 'TileSpacing', 'compact');
+    title(t, pns.name,'FontSize',20); 
     global axl;
     global axr;
     axr = nexttile(t, 2); 
