@@ -60,7 +60,7 @@ function plot_tokens(sim_result,set_of_places)
                       'Position', [250, 100, 150, 100], 'FontSize', 14);  
     plotpTimeAxes = axes('Units', 'pixels', 'Position', [150, 300, 300, 300]); 
  
-    plotp_time(plotpTimeAxes,sim_result,set_of_places,finishing_time{currentStateIdx});
+    plotp_time(sim_result,set_of_places,finishing_time{currentStateIdx},plotpTimeAxes);
 
     timeText = uicontrol('Style', 'text', 'String', ['Time: ' finishing_time{currentStateIdx}], ...
                       'Position', [50, 160, 150, 40], 'FontSize', 14);
@@ -102,7 +102,7 @@ function plot_tokens(sim_result,set_of_places)
         stateText.String = ['State: ' state{currentStateIdx}];
         markingText.String = ['Marking: ' markings_string(current_markings{currentStateIdx})];
         plot_markings(current_markings{currentStateIdx});
-        plotp_time(plotpTimeAxes,sim_result,set_of_places,finishing_time{currentStateIdx});
+        plotp_time(sim_result,set_of_places,finishing_time{currentStateIdx},plotpTimeAxes);
     end
 
 

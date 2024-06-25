@@ -1,9 +1,9 @@
-function [TOKEN_MATRIX] = plotp_time(plotAxes, simResults, set_of_places, time)
+function [TOKEN_MATRIX] = plotp_time(simResults, set_of_places, time, plotAxes)
     global PN;
     PN = simResults;
     
     % 检查是否传入 plotAxes
-    if nargin < 1 || isempty(plotAxes)
+    if nargin < 4 || isempty(plotAxes)
         figure;
         plotAxes = gca; % 获取当前轴
     end
